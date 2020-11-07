@@ -1,0 +1,102 @@
+.note-highlighter {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    position: absolute;
+    z-index: 1000;
+    box-shadow: 0 4px 8px 0 rgba(60, 64, 73, 0.1), 0 0 1px 0 rgba(60, 64, 73, 0.15);
+    background-color: #ffffff;
+
+    .highlighter-header {
+        display: flex;
+
+        .delete-tooltip,
+        .close-tooltip {
+            cursor: pointer;
+        }
+
+        .highlighter-color-picker {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+
+            .yellow-highlighter {
+                background-color: #fff700;
+                height: 1.6rem;
+                width: 1.6rem;
+                display: flex;
+                -webkit-box-pack: center;
+                justify-content: center;
+                -webkit-box-align: center;
+                align-items: center;
+                border-width: 1px;
+                border-style: solid;
+                border-color: #ffd700;
+                border-image: initial;
+                border-radius: 2rem;
+                cursor: pointer;
+            }
+
+            .green-highlighter {
+                background-color: #3fff00;
+                height: 1.6rem;
+                width: 1.6rem;
+                margin-left: 8px;
+                display: flex;
+                -webkit-box-pack: center;
+                justify-content: center;
+                -webkit-box-align: center;
+                align-items: center;
+                border-width: 1px;
+                border-style: solid;
+                border-color: #228b22;
+                border-image: initial;
+                border-radius: 2rem;
+                cursor: pointer;
+            }
+
+            .selected-highlighter-color {
+                display: block;
+                height: 14px;
+            }
+        }
+    }
+
+    .inline-note {
+        display: block;
+        font-weight: normal;
+        border-width: 1px;
+        border-style: solid;
+        border-color: rgb(213, 213, 213);
+        border-image: initial;
+        padding: 8px;
+    }
+
+    .highlighter-buttons {
+        margin-top: 8px;
+        display: grid;
+        grid-auto-flow: column;
+        overflow: visible;
+        gap: 1rem;
+
+        .save-button {
+            background-color: #fdbd17;
+            border-radius: 0.2rem;
+            border-style: none;
+        }
+
+        .cancel-button {
+            background-color: rgb(255, 255, 255);
+            border-radius: 0.2rem;
+            border-style: none;
+        }
+    }
+}
+
+.show-highlighter {
+    display: flex;
+}
+
+.hidden-highlighter {
+    display: none !important;
+}
