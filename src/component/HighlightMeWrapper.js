@@ -18,7 +18,6 @@ class HighlightMeWrapper extends Component {
     }
 
     onMouseUpHandler = (e) => {
-        console.log('onMouseUpHandler');
         let isTouchEvent = false
         if (e.nativeEvent instanceof TouchEvent) {
             isTouchEvent = true
@@ -101,6 +100,12 @@ class HighlightMeWrapper extends Component {
                 cList = e.target.id;
             }
 
+            console.log('cList', cList);
+            if (cList == null || cList === 'highlight') {
+                // Ignore selection if it is along with the highlight.
+                return
+            }
+
             let topPosition = e.pageY + 15
             let leftPosition = e.pageX
             if (isTouchEvent) {
@@ -142,24 +147,19 @@ class HighlightMeWrapper extends Component {
         // Add highlights to the HTML content
         if (highlightedObjectList.length) {
             highlightedObjectList.forEach(highlightObj => {
-                console.log(highlightObj);
                 let start = highlightObj.selectionStart
                 let end = highlightObj.selectionEnd
                 let { focusNodeText, highlighterColor } = highlightObj
 
                 let index = 0//innerHTML.indexOf(highlightObj.elementClass);
-                console.log('index', index);
 
                 if (index >= 0) {
                     let subHTML = innerHTML.substring(index, innerHTML.length)
-                    console.log('subHTML', subHTML);
 
                     let mainContentStartIndex = subHTML.indexOf(focusNodeText)
                     let mainContentEndIndex = mainContentStartIndex + focusNodeText.length
                     let mainContent = subHTML.substring(mainContentStartIndex, mainContentEndIndex)
                     let highlightedText = mainContent.substring(start, end)
-                    console.log('highlightedText', highlightedText);
-                    console.log('highlightObj.highlightedText', highlightObj.highlightedText);
                     if (highlightedText === highlightObj.highlightedText) {
                         let modifiedMainContent = mainContent.substring(0, start) + `<span class='highlight highlight-${highlighterColor}' name='${start}##${end}'>` + highlightedText + "</span>" + mainContent.substring(end, subHTML.length)
                         let modifiedSubHTML = subHTML.substring(0, mainContentStartIndex) + modifiedMainContent + subHTML.substring(mainContentEndIndex, subHTML.length)
