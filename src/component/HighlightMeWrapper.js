@@ -40,7 +40,7 @@ class HighlightMeWrapper extends Component {
                     html = container.innerHTML;
                 }
             } else if (typeof document.selection != "undefined") {
-                if (document.selection.type == "Text") {
+                if (document.selection.type === "Text") {
                     html = document.selection.createRange().htmlText;
                 }
             }
@@ -92,12 +92,13 @@ class HighlightMeWrapper extends Component {
             }
 
             const selectionEnd = selectionStart + selection.length;
+            var cList = undefined;
 
             if (e.target.hasAttribute('class')) {
-                var cList = e.target.classList;
+                cList = e.target.classList;
                 cList = cList[0];
             } else {
-                var cList = e.target.id;
+                cList = e.target.id;
             }
 
             let topPosition = e.pageY + 15
