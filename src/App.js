@@ -9,6 +9,9 @@ class App extends Component {
                 <HighlightMeWrapper
                     content="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat omnis iure assumenda illo alias dicta nostrum aperiam, similique molestias suscipit. Reprehenderit vero animi quaerat veniam modi sed dolor nam omnis."
                 />
+                <HighlightMeWrapper>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Distinctio, aperiam. Illo inventore, necessitatibus excepturi asperiores, consequatur alias porro, nostrum laborum delectus omnis neque. Tempora est eum deserunt sed totam reiciendis?</p>
+                </HighlightMeWrapper>
             </div>
         )
     }

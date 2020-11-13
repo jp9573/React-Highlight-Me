@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import HighlightText from './HighlightText/HighlightText'
 import './HighlightMeWrapper.scss'
+import ReactDOMServer from 'react-dom/server';
 
 class HighlightMeWrapper extends Component {
     state = {
@@ -141,7 +142,7 @@ class HighlightMeWrapper extends Component {
 
     getContent = () => {
         let { highlightedObjectList } = this.state
-        let innerHTML = this.props.content;
+        let innerHTML = this.props.content || ReactDOMServer.renderToStaticMarkup(this.props.children);
 
         // Add highlights to the HTML content
         if (highlightedObjectList.length) {
