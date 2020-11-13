@@ -177,7 +177,7 @@ class HighlightMeWrapper extends Component {
         this.setState({
             highlightedObjectList: [...this.changeListObject(this.state.highlightedObjectList, this.state.highlightedText, this.state.highlightedObject.selectionStart, null, true)],
             editHighlight: {}
-        })
+        }, this.callOnHighlightListener)
         this.closeHighlighter()
     }
 
@@ -211,6 +211,12 @@ class HighlightMeWrapper extends Component {
         return arr;
     }
 
+    callOnHighlightListener = () => {
+        if (typeof this.props.onHighlightHandler === 'function') {
+            this.props.onHighlightHandler(this.state.highlightedObjectList)
+        }
+    }
+
     saveHighlight = (highlightObj) => {
         if (highlightObj.highlighterColor) {
             if (this.state.highlightedObjectList.filter(o => o.focusNodeText === this.state.highlightedObject.focusNodeText).length > 0) {
@@ -221,7 +227,7 @@ class HighlightMeWrapper extends Component {
                         highlighterColor: highlightObj.highlighterColor,
                     })],
                     editHighlight: Object.keys(this.state.editHighlight).length !== 0 ? { highlighterColor: highlightObj.highlighterColor } : this.state.editHighlight
-                })
+                }, this.callOnHighlightListener)
             } else {
                 //Highlight for the first time
                 this.setState({
@@ -229,14 +235,14 @@ class HighlightMeWrapper extends Component {
                         ...this.state.highlightedObject,
                         highlighterColor: highlightObj.highlighterColor,
                     }]
-                })
+                }, this.callOnHighlightListener)
             }
         } else {
             // Highlight removed
             this.setState({
                 highlightedObjectList: [...this.changeListObject(this.state.highlightedObjectList, this.state.highlightedText, this.state.highlightedObject.selectionStart, null, true)],
                 editHighlight: Object.keys(this.state.editHighlight).length !== 0 ? { highlighterColor: highlightObj.highlighterColor } : this.state.editHighlight
-            })
+            }, this.callOnHighlightListener)
         }
         this.closeHighlighter()
     }

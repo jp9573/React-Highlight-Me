@@ -3,12 +3,18 @@ import HighlightMeWrapper from './component/HighlightMeWrapper';
 import './App.scss';
 
 class App extends Component {
+
+    onHighlightHandler = (listOfHighlights) => {
+        console.log(listOfHighlights);
+    }
+
     render() {
         return (
             <div className="container">
                 {/* Pass string as content */}
                 <HighlightMeWrapper
                     content="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat omnis iure assumenda illo alias dicta nostrum aperiam, similique molestias suscipit. Reprehenderit vero animi quaerat veniam modi sed dolor nam omnis."
+                    onHighlightHandler={this.onHighlightHandler}
                 />
 
                 {/* Pass html content as content */}
