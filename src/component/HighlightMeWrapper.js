@@ -100,7 +100,6 @@ class HighlightMeWrapper extends Component {
                 cList = e.target.id;
             }
 
-            console.log('cList', cList);
             if (cList == null || cList === 'highlight') {
                 // Ignore selection if it is along with the highlight.
                 return
@@ -241,12 +240,49 @@ class HighlightMeWrapper extends Component {
         this.closeHighlighter()
     }
 
+    highlightOnClickHandler = (e) => {
+        const el = e.target.closest(".highlight");
+        if (el && e.currentTarget.contains(el)) {
+            const range = e.target.getAttribute('name')
+            this.showHighlight(e, range.split('##'))
+        }
+    }
+
+    showHighlight = (event, range) => {
+        let topPosition = event.pageY + 15
+        let leftPosition = event.pageX
+        if (event.nativeEvent instanceof TouchEvent) {
+            var touch = event.changedTouches[0]
+            topPosition = touch.pageY + 15
+            leftPosition = touch.pageX
+        }
+
+        this.state.highlightedObjectList.forEach(highlighObj => {
+            if (highlighObj.selectionStart === Number(range[0]) && highlighObj.selectionEnd === Number(range[1])) {
+
+                this.setState({
+                    showHighlighter: true,
+                    highlightedText: highlighObj.highlightedText,
+                    highlighterPosition: {
+                        top: topPosition,
+                        left: leftPosition
+                    },
+                    highlightedObject: highlighObj,
+                    editHighlight: { highlighterColor: highlighObj.highlighterColor }
+                })
+            }
+        });
+    }
+
     render() {
         return (
             <div className="highlight-me-wrapper"
                 onMouseUp={this.onMouseUpHandler}>
 
-                <div className="highlight-me-content"
+                <div
+                    className="highlight-me-content"
+                    onClick={this.highlightOnClickHandler}
+                    onTouchStart={this.highlightOnClickHandler}
                     dangerouslySetInnerHTML={{ __html: this.getContent() }}></div>
 
                 <HighlightText

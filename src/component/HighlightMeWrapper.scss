@@ -1,15 +1,15 @@
 .highlight-me-wrapper {
     .highlight {
         cursor: pointer;
+        padding-left: 0.1rem;
+        padding-right: 0.1rem;
     }
 
     .highlight-yellow {
         background: #fff700;
-        padding: 0.1rem;
     }
 
     .highlight-green {
         background: #3fff00;
-        padding: 0.1rem;
     }
 }
